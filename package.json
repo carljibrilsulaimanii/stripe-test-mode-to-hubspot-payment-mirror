@@ -1,0 +1,12 @@
+{
+  "name": "stripe-test-mode-to-hubspot-payment-mirror",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mirror Stripe test-mode payments into the HubSpot object Stripe Data Sync fills with live ones, so payment workflows can be tested without real charges.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  }
+}
