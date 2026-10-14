@@ -42,8 +42,11 @@ unchanged. Two properties keep them apart from live data:
 | **Record Environment** (`record_environment`) | empty, or `Live` | `Test` |
 | **Test Txn Key** (`test_txn_key`) | empty | the PaymentIntent id |
 
-Data Sync is set to **Do no matching**, so it never claims or overwrites the mirror's
-rows; and the mirror skips any live event, so it never doubles a real payment.
+Data Sync never claims or overwrites the mirror's rows: with **Do no matching** it
+doesn't look at existing rows, and when it matches on the payment id (as
+[hubspot-stripe-data-sync-setup-and-recovery](https://github.com/carljibrilsulaimanii/hubspot-stripe-data-sync-setup-and-recovery)
+recommends) a sandbox `pi_...` id never exists in live Stripe. The mirror skips any
+live event, so it never doubles a real payment.
 
 ## How it works
 
@@ -106,8 +109,9 @@ page, and paste it as `OBJECT_TYPE` at the top of
 
 **1b.** Open the sync's settings (**Stripe Payment Transaction sync**: **Configure ·
 Limit · Organize · Review**) and confirm **Sync direction** is Stripe → HubSpot and
-**Record matching** is **Do no matching** (wording may differ). That's what keeps Data
-Sync off the mirror's rows.
+**Record matching** is either **Do no matching** or **Record ID = Stripe Payment
+Transaction ID**. Both keep Data Sync off the mirror's rows: sandbox ids never match
+anything in live Stripe.
 
 **1c.** Add two properties to the object in **Settings → Properties**:
 
@@ -339,6 +343,7 @@ integration leaves out into HubSpot. Each one stands alone.
 
 | Repo | What it adds |
 |---|---|
+| [hubspot-stripe-data-sync-setup-and-recovery](https://github.com/carljibrilsulaimanii/hubspot-stripe-data-sync-setup-and-recovery) | The base the rest builds on: HubSpot's Stripe Data Sync into payment and subscription objects, and getting it back when the connection dies (lost mappings, duplicates, backfill, the sync queue) |
 | [hubspot-stripe-utm-attribution](https://github.com/carljibrilsulaimanii/hubspot-stripe-utm-attribution) | UTM attribution: keeps UTMs across pages when HubSpot form redirects drop them, gets them back from Stripe on the checkout success page, and writes them onto the payment record |
 | [hubspot-order-form-stripe-checkout-link-integration](https://github.com/carljibrilsulaimanii/hubspot-order-form-stripe-checkout-link-integration) | A two-step HubSpot order form that hands buyers to a Stripe Payment Link with their email and campaign UTMs attached |
 | [stripe-webhooks-to-hubspot-custom-events](https://github.com/carljibrilsulaimanii/stripe-webhooks-to-hubspot-custom-events) | Any Stripe event into a HubSpot workflow through the "Webhook event is received" trigger, no middleware |
