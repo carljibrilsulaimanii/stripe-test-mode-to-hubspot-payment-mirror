@@ -350,6 +350,7 @@ integration leaves out into HubSpot. Each one stands alone.
 | [hubspot-capi-server-side-lead-and-purchase-conversions-meta-google](https://github.com/carljibrilsulaimanii/hubspot-capi-server-side-lead-and-purchase-conversions-meta-google) | Stripe purchases sent server-side from HubSpot workflows to Meta and Google |
 | [hubspot-stripe-zero-dollar-checkout-sync](https://github.com/carljibrilsulaimanii/hubspot-stripe-zero-dollar-checkout-sync) | Free and 100%-off Stripe Checkout orders, which create no payment, written into a HubSpot custom object, plus a backfill |
 | [hubspot-stripe-payment-product-names-and-routing](https://github.com/carljibrilsulaimanii/hubspot-stripe-payment-product-names-and-routing) | Which product each Stripe payment was for, written onto the payment record, and a master workflow that routes buyers by product |
+| [hubspot-stripe-payment-plan-end-dates](https://github.com/carljibrilsulaimanii/hubspot-stripe-payment-plan-end-dates) | Payment plans sold through Stripe Payment Links stop by themselves after the last payment: a HubSpot workflow sets the end date on each subscription |
 | **stripe-test-mode-to-hubspot-payment-mirror** (this repo) | Stripe test-mode payments in the same HubSpot object as live ones, so payment workflows can be tested without real charges |
 
 ---
